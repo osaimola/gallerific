@@ -1,0 +1,32 @@
+<html>
+<head>
+ {% load static %}
+ {% load i18n %}
+    <link rel="stylesheet" href="{% static 'css/account/styles.css' %}" type = "text/css"/> 
+    <script src="https://kit.fontawesome.com/56e0bd7b72.js" crossorigin="anonymous"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% block head_links %}
+{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-title" href="{% url 'images:home' %}">Gallerific</a>
+        <div class="navbar-link-container">
+            <a class="navbar-link" href="{% url 'account_login' %}">{% trans "Log in" %}</a>
+            <a class="navbar-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+        </div> 
+    </nav>
+    {% block content%}
+	    {% block messages %}
+        {% endblock %}
+    {% endblock %}
+    {% block content_extra %}
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+</body>
+</html>

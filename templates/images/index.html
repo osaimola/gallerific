@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load el_pagination_tags %}
+
+{% block extra_meta %}
+    <script src="https://kit.fontawesome.com/56e0bd7b72.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+
+    <form action="" method="GET">
+        {# search bar #}
+        <div class="search">
+            <label for="q" class="sr-only">Search term:</label>
+            <input placeholder="Enter a search term" type="text" name="q" id="q" class="search-term"/>
+            <button type="submit">Search</button>
+        </div>
+
+        {# advanced color filters #}
+        <div class="advanced-filters-colors">
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">white:</p>
+                    <input type="checkbox" name="color" value="white" />
+                    <span class="checkmark white"></span>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">black:</p>
+                    <input type="checkbox" name="color" value="black" />
+                    <span class="checkmark black"></span>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">gray:</p>
+                    <input type="checkbox" name="color" value="gray" />
+                    <span class="checkmark gray"></span>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">red:</p>
+                    <input type="checkbox" name="color" value="red" />
+                    <span class="checkmark red"></span>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">orange:</p>
+                    <input type="checkbox" name="color" value="orange" />
+                    <span class="checkmark orange"></span>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">yellow:</p>
+                    <input type="checkbox" name="color" value="yellow" />
+                    <span class="checkmark yellow"></span>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">blue:</p>
+                    <input type="checkbox" name="color" value="blue" />
+                    <span class="checkmark blue"></span>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">purple:</p>
+                    <input type="checkbox" name="color" value="purple" />
+                    <span class="checkmark purple"></span>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">pink:</p>
+                    <input type="checkbox" name="color" value="pink" />
+                    <span class="checkmark pink"></span>
+                </label>
+            </div>
+
+        </div>
+
+        {# advanced property filters #}
+        <div class="advanced-filters-property">
+            <label for="property" class="sr-only">Image property:</label>
+            <input placeholder="Filter by property" type="text" name="property" id="property" class="property-filter"/>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">Person:</p>
+                    <input type="checkbox" name="property" value="person" />
+                    <i class="fas fa-user checkicon"></i>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">Car:</p>
+                    <input type="checkbox" name="property" value="car" />
+                    <i class="fas fa-car checkicon"></i>
+                </label>
+            </div>
+
+            <div class="advanced-filter-option">
+                <label class="checkmark-container"><p class="sr-only">Tree:</p>
+                    <input type="checkbox" name="property" value="tree" />
+                    <i class="fab fa-pagelines checkicon"></i>
+                </label>
+            </div>
+        </div>
+    </form>
+
+    <h2 class="section-header">Public Images</h2>
+    {% if public_image_list %}
+        <div class="image-list">
+            {% paginate public_image_list using "public_images"%}
+            {% for image in public_image_list %}
+                <div class="image-item" style="background-image: url({{image.get_image_url}})">
+                    <div class="image-controls">
+                        {% if user == image.owner %}
+                        <a href="{% url 'images:delete' image.pk %}"><i class="far fa-trash-alt"></i><p class="sr-only">delete</p></a>
+                        {% endif %}
+                    </div>
+                    <div class="image-title">
+                        <p>{{image.title}}</p>
+                        <p>{{image.properties}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">{% show_pages %}</div>
+    {% else %}
+        <p>Nothing to see here :(</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <h2 class="section-header">Private Images</h2>
+        {% if private_image_list %}
+            <div class="image-list">
+                {% paginate private_image_list using "private_images"%}
+                {% for image in private_image_list %}
+                    <div class="image-item" style="background-image: url({{image.get_image_url}})">
+                        <div class="image-controls">
+                            {% if user == image.owner %}
+                            <a href="{% url 'images:delete' image.pk %}"><i class="far fa-trash-alt"></i><p class="sr-only">delete</p></a>
+                            {% endif %}
+                        </div>
+
+                        <div class="image-title">
+                            <p>{{image.title}}</p>
+                            <p>{{image.properties}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="pagination">{% show_pages %}</div>
+        {% else %}
+            <p>Nothing to see here :(</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

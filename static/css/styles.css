@@ -1,0 +1,384 @@
+:root {
+  --text-main: #273440;
+  --text-secondary: #5b7083;
+  --border-grey: #ebeef0;
+  --background-grey: #f5f5f5;
+  --link-blue: #2278b5;
+
+  --red: #ff0400;
+  --orange: #ff8000;
+  --yellow: #ffff00;
+  --green: #00ffbf;
+  --blue: #4000ff;
+  --purple: #ff00bf;
+  --pink: #ff0040;
+}
+
+* {
+  font-family: "Noto Sans", sans-serif;
+}
+
+body {
+  background-color: var(--background-grey);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.white {
+  background-color: white;
+}
+
+.black {
+  background-color: #4c4c4c;
+}
+
+.gray {
+  background-color: #a0a0a0;
+}
+
+.red {
+  background-image: linear-gradient(to right bottom, #ff0069, #ff003d, #ff0400);
+}
+
+.orange {
+  background-image: linear-gradient(
+    to right bottom,
+    #ff4000,
+    #ff5400,
+    #ff6400,
+    #ff7300,
+    #ff8000
+  );
+}
+
+.yellow {
+  background-image: linear-gradient(to right bottom, #ffc000, #ffdf00, #ffff00);
+}
+
+.green {
+  background-image: linear-gradient(
+    to right bottom,
+    #cbff48,
+    #98ff74,
+    #62ff9c,
+    #00ffbf
+  );
+}
+
+.blue {
+  background-image: linear-gradient(
+    to right bottom,
+    #00def0,
+    #00b5ff,
+    #0081ff,
+    #4000ff
+  );
+}
+
+.purple {
+  background-image: linear-gradient(
+    to right bottom,
+    #9700ee,
+    #c500dd,
+    #e600cd,
+    #ff00bf
+  );
+}
+
+.pink {
+  background-image: linear-gradient(
+    to right bottom,
+    #ff00bf,
+    #ff009e,
+    #ff007d,
+    #ff005e
+  );
+}
+
+.main-content {
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 0.3rem;
+  box-shadow: 0px 2px 20px 0px #0000000a;
+}
+
+/* style the navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+nav .nav-title {
+  font-size: 2rem;
+  margin-right: 1.5rem;
+  color: var(--text-main);
+}
+
+nav .nav-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: var(--link-blue);
+}
+
+/* styling the advanced filters */
+.checkmark-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* hide the browser checkboxes */
+.checkmark-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 1rem;
+  border: 3px solid #f5f5f5;
+  box-shadow: 0 2px 6px -2px #0000002b;
+}
+/* add border on mouse over */
+.checkmark-container:hover input ~ .checkmark,
+.checkmark-container input:focus ~ .checkmark {
+  border: 3px solid var(--text-secondary);
+}
+/* add checked border */
+.checkmark-container input:checked ~ .checkmark {
+  border: 3px solid black;
+}
+
+/* custom checkicon */
+.checkicon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--text-secondary);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid #f5f5f5;
+}
+/* add border on mouse over */
+.checkmark-container:hover input ~ .checkicon,
+.checkmark-container input:focus ~ .checkicon {
+  border: 2px solid var(--text-secondary);
+}
+
+/* add checked border */
+.checkmark-container input:checked ~ .checkicon {
+  border: 2px solid black;
+  color: #252b31;
+}
+
+/* style the advanced filter containers */
+form .advanced-filters-colors {
+  display: flex;
+  padding: 1rem 0;
+  justify-content: space-between;
+}
+
+form .advanced-filters-property {
+  display: flex;
+  padding: 1rem 0;
+  height: 2rem;
+  justify-content: space-between;
+}
+
+/* Style other form elements */
+input {
+  padding: 0 0.5rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--border-grey);
+}
+input:hover {
+  border: 1px solid var(--text-main);
+}
+
+form .search {
+  display: flex;
+}
+
+form .search-term {
+  width: 100%;
+  margin-right: 1rem;
+  height: 1.8rem;
+}
+
+form .property-filter {
+  width: 50%;
+}
+
+form button {
+  border: 1px solid transparent;
+  padding: 0 1rem;
+  color: white;
+  cursor: pointer;
+  background-color: var(--text-main);
+  font-weight: 700;
+  border-radius: 0.3rem;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+form button:hover {
+  color: var(--text-main);
+  background-color: white;
+  border: 1px solid var(--text-main);
+}
+
+/* style the image results */
+.section-header {
+  background-color: var(--background-grey);
+  padding: 1rem 1rem;
+}
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.image-item {
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 18rem;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* style the image controls */
+.image-controls {
+  display: flex;
+  justify-content: flex-end;
+  transition: opacity 0.25s;
+  padding: 1rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+.image-controls a {
+  color: red;
+  padding: 0.5rem 0.65rem;
+  border-radius: 2rem;
+  background-color: #ffffffd4;
+}
+.image-controls a:hover {
+  background-color: red;
+  color: white;
+}
+
+.image-title {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: white;
+  background: #00000061;
+  backdrop-filter: blur(0.3rem);
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+.image-title > p:first-of-type {
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+.image-title > p:last-of-type {
+  margin: 0 0 0.5rem 0;
+}
+
+/* style pagination links */
+.pagination {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pagination a {
+  color: var(--text-secondary);
+  background-color: var(--background-grey);
+  padding: 0 0.5rem;
+  border-radius: 0.2rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  color: var(--link-blue);
+}
+
+.pagination span {
+  padding: 0 0.5rem;
+  border-radius: 0.2rem;
+  color: white;
+  background-color: var(--link-blue);
+}
+
+@media screen and (min-width: 600px) {
+  .main-content {
+    padding: 5% 10%;
+    max-width: 49rem;
+    margin: auto;
+  }
+
+  nav .nav-links {
+    width: 40%;
+  }
+
+  .image-item {
+    width: 49%;
+  }
+
+  .image-controls {
+    opacity: 0;
+  }
+
+  .image-item:hover .image-controls {
+    opacity: 100;
+  }
+
+  .image-title {
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .image-item:hover .image-title {
+    opacity: 100;
+  }
+}

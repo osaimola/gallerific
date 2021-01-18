@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block extra_meta %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}
+
+{% block content %}
+<form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <div class="g-recaptcha" data-sitekey="6LfksS4aAAAAAM01_9GUpudXOW0FKGfh2Av2qR-r"></div>
+    <button type="submit">Add image</button>
+</form>
+ 
+{% endblock %}

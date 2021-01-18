@@ -1,0 +1,58 @@
+{% extends "account/account_base.html" %}
+{% load i18n %}
+
+{% block head_links %} 
+  <title>{% trans "Sign In" %}</title>
+{% endblock %}
+
+{% block head_title %}{% trans "Sign In" %} {% endblock %}
+{% block content %}
+
+{% block messages %}
+  {% if messages %}
+    {% for message in messages %}
+      {% if not user.is_authenticated and 'success' in message.tags %}
+      {% else %}
+        <div class="alert alert-warning alert-dismissible fade show">
+                <strong class="text-danger">{{message}}</strong>
+        </div>
+      {% endif %}
+    {% endfor %} 
+  {% endif %}
+{% endblock %}
+
+<div class="login-container">
+  <div class="title-container">
+<h1 class="title-text">{% trans "Sign in to Gallerific" %}</h1>
+  </div>
+  <div class="form-container">
+<form class="container-fluid text-center p-0" id="login_form" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+
+  {% for field in form %}
+    <div class="form-group">
+      {{field.label_tag}} {{field}}
+      <div class="invalid-feedback">
+        {{field.errors}}
+      </div>
+    </div>  
+  {% endfor %}
+
+  {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+
+  <button  class="form-button" type="submit">{% trans "Log in" %}</button> 
+</form>
+    {% load account socialaccount %}
+    {% get_providers as socialaccount_providers %}
+    <ul class="list-unstyled m-0 d-flex">
+    {% for provider in socialaccount_providers %}
+        <a title="{{provider.name}}" class="form-button {{provider.name}}" 
+         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><i class="fa fa-{{provider.name}} mr-2" id="social_icon"></i>{% trans "Sign in with" %} {{provider.name}}</a>
+    {% endfor %}
+    </ul>
+  </div>
+  </div>
+</div>
+{% endblock %}

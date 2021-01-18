@@ -1,0 +1,11 @@
+{% extends "account/account_base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+    {% trans 'Sign Up Closed' %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mt-4">{% trans 'Sign Up Closed' %}</h1>
+    <p class="text-center mt-2">{% trans 'Sorry, sign ups are currently closed. Use a Gmail account to log in' %}</p>
+{% endblock %}

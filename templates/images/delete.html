@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block extra_meta %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}
+
+{% block content %}
+    {% if unauthorized %}
+        <p>Only file owners can delete a file</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %} 
+            <p>Are you sure you want to delete "{{ object }}"?</p> 
+            <input type="submit" value="Confirm"> 
+        </form>
+    {% endif %}
+{% endblock %}
